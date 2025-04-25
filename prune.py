@@ -19,7 +19,7 @@ languages = {
         'ext': 'wgsl',
         'frameworks': [ "WebGPU" ],
     },
-    'WGSL': {
+    'WESL': {
         'ext': 'wesl',
         'frameworks': [ "WebGPU" ],
     },
