@@ -10,7 +10,7 @@
 
 ```
 
-* **Multi-language**. Right now, most of the code is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but we are slowly extending to WGSL (`*.wgsl`), CUDA (`*.cuh`) and Metal (`*.msl`).
+* **Multi-language**. Right now, most of the code is GLSL (`*.glsl`) and HLSL (`*.hlsl`), but we are slowly extending to WGSL (`*.wgsl`/`*.wesl`), CUDA (`*.cuh`) and Metal (`*.msl`).
 
 ```
     math/mirror.glsl
@@ -135,3 +135,8 @@ WGSL as a language has some fundamental differences from GLSL, HLSL and METAL. H
     fn random43(p: vec3f) -> vec4f { ... }
     fn random44(p: vec4f) -> vec4f { ... }
 ```
+
+* **WGSL Preprocessing**. WGSL does not support preprocessor directives, however the community driven solution [WESL: Community Extended WGSL](https://wesl-lang.dev/) aims to solve this by via an extended language specification. The WESL toolset can be found on [GitHub](https://github.com/wgsl-tooling-wg). 
+* WESL uses the `@directive` syntax to remain consistent with the WGSL core language, and the directive to import another module uses the keywork "import" instead of "include", ie `@import package::module::func;`.
+* WESL has been added as an additional set of files, so that it may be used in new projects without breaking any existing code that does really on the non-supported # preprocessor directives in the original WGSL files. WESL may import WGSL, so any WGSL modules that do not contain special directives are perfectly valid as-is and don't need to be replicated.
+* As neither is officially supported, I (@TheBeardedQuack) would like to suggest deprecating the use of `#include` in WGSL files in favour of `@import` in WESL which at least provides a toolchain. Until such point that WGSL may accept the proposals of WESL.
